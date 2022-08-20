@@ -24,13 +24,18 @@ def changeState(roomNumber,stateChange):
             print("room doesn't exist")
     else: 
         print("floor doesn't exist")
+def showAllRooms():
+    for i in range(0,len(hotel)):
+        for j in range(0,len(hotel[i])):
+            print('{}.{}:{}'.format(i+1,j+1,hotel[i][j]),end=" ")
+        if i<len(hotel)-1:
+            print('\n')
 
 def showRooms(roomType):
     roomList=[]
     roomType=roomType.upper()
     if roomType not in valid:
         return print('invalid input')
-        
     for i in range(0,len(hotel)):
         for j in range(0,len(hotel[i])):
             if roomType==hotel[i][j]:
@@ -41,3 +46,8 @@ def showRooms(roomType):
 showRooms('R')
 
 changeState('4.5','o')
+showAllRooms()
+# a = int(input('Enter a number (-1 to quit): '))
+  
+# while a != -1:
+#     a = int(input('1 to view rooms\n-1 to quit)\nEnter a number: '))
