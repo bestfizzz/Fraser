@@ -1,3 +1,6 @@
+from operator import le
+
+valid=['A','R','O']
 hotel = [['A', 'A', 'A', 'A'],
        ['A', 'A', 'A', 'A'],
        ['O', 'O', 'R', 'R'],
@@ -8,13 +11,21 @@ def logRoom(roomlist, roomType):
     print('The {} rooms are: '.format(a),', '.join(roomlist))
 
 def changeState(roomNumber,stateChange):
+    stateChange=stateChange.upper()
+    if stateChange not in valid:
+        return print('invalid state input')
     floor=int(roomNumber[:roomNumber.index(".")].strip())
     room=int(roomNumber[roomNumber.index(".")+1:].strip())
-    hotel[floor-1][room-1]=stateChange.upper()
-    print(hotel)
+    if floor <= len(hotel):
+        if room<= len(hotel[floor-1]):
+            hotel[floor-1][room-1]=stateChange.upper()
+            print(hotel)
+        else: 
+            print("room doesn't exist")
+    else: 
+        print("floor doesn't exist")
 
 def showRooms(roomType):
-    valid=['A','R','O']
     roomList=[]
     roomType=roomType.upper()
     if roomType not in valid:
@@ -28,4 +39,5 @@ def showRooms(roomType):
         i=+1
     return logRoom(roomList,roomType)
 showRooms('R')
-changeState('3.4','o')
+
+changeState('4.5','o')
