@@ -19,7 +19,7 @@ def changeState(roomNumber,stateChange):
     if floor <= len(hotel):
         if room<= len(hotel[floor-1]):
             if stateChange=='R' & hotel[floor-1][room-1]=='O':
-                print('Room already ocupied')
+                print('Room already occupied')
             elif stateChange==hotel[floor-1][room-1]:
                 print('no change were made')
             else:
@@ -49,20 +49,39 @@ def showRooms(roomType):
     return logRoom(roomList,roomType)
 print('WELLCOME TO HOTEL')
 while True:
-    print('\n4 to cancel booked rooms\n3 to book rooms\n2 to take rooms\n1 to view rooms\n-1 to quit\n')
-    a = int(input('Enter a number: '))
-    if a==1:
-        print("here are the rooms:")
-        showAllRooms()
-        print('\n')
-    elif a>=2 & a<=4:
-        case=[['take','O'],['book','R'],['cancel','A']]
-        print('aaaaaaa')
-        b=input('Enter room number(floor.room) you want to {}: '.format(case[a-2][0]))
-        changeState(b,case[a-2][1])
-    elif a==-1:
-        print('Good bye')
-        break
-    else:
+    print('\nmanual:\n4 to cancel booked rooms\n3 to book rooms\n2 to take rooms\n1 to view rooms\n-1 to quit\n')
+    a = input('Enter a number: ')
+    validInput=['-1','1','2','3','4']
+    if a not in validInput:
         print('invalid input')
+    else:
+        a=int(a)
+        if a==1:
+            while True:
+                print('\nmaunal\n4 to see booked rooms\n3 to see occupied rooms\n2 to see available rooms\n1 to view all rooms\n-1 to go back to menu\n')
+                b = input('Enter b number: ')
+                if b not in validInput:
+                    print('invalid input')
+                    a=1
+                else:
+                    b=int(b)
+                    if b>=2 and b<=4:
+                        case=['A','O','R']
+                        showRooms(case[b-2])
+                        a=1
+                    elif b==1:
+                        print("here are the all rooms: ")
+                        showAllRooms()
+                    elif b==-1:
+                        break
+        elif a>=2 and a<=4:
+            case=[['take','O'],['book','R'],['cancel','A']]
+            print('aaaaaaa')
+            b=input('Enter room number(floor.room) you want to {}: '.format(case[a-2][0]))
+            changeState(b,case[a-2][1])
+        elif a==-1:
+            print('Good bye')
+            break
+        else:
+            print('invalid input')
     showAllRooms()
