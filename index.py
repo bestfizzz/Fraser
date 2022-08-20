@@ -18,18 +18,22 @@ def changeState(roomNumber,stateChange):
     room=int(roomNumber[roomNumber.index(".")+1:].strip())
     if floor <= len(hotel):
         if room<= len(hotel[floor-1]):
-            hotel[floor-1][room-1]=stateChange.upper()
-            print(hotel)
+            if stateChange=='R' & hotel[floor-1][room-1]=='O':
+                print('Room already ocupied')
+            elif stateChange==hotel[floor-1][room-1]:
+                print('no change were made')
+            else:
+                hotel[floor-1][room-1]=stateChange
+                print(hotel)
         else: 
-            print("room doesn't exist")
+            print("\nroom doesn't exist")
     else: 
-        print("floor doesn't exist")
+        print("\nfloor doesn't exist")
 def showAllRooms():
     for i in range(0,len(hotel)):
         for j in range(0,len(hotel[i])):
             print('{}.{}:{}'.format(i+1,j+1,hotel[i][j]),end=" ")
-        if i<len(hotel)-1:
-            print('\n')
+        print('\t')
 
 def showRooms(roomType):
     roomList=[]
@@ -43,11 +47,22 @@ def showRooms(roomType):
             j=j+1
         i=+1
     return logRoom(roomList,roomType)
-showRooms('R')
-
-changeState('4.5','o')
-showAllRooms()
-# a = int(input('Enter a number (-1 to quit): '))
-  
-# while a != -1:
-#     a = int(input('1 to view rooms\n-1 to quit)\nEnter a number: '))
+print('WELLCOME TO HOTEL')
+while True:
+    print('\n4 to cancel booked rooms\n3 to book rooms\n2 to take rooms\n1 to view rooms\n-1 to quit\n')
+    a = int(input('Enter a number: '))
+    if a==1:
+        print("here are the rooms:")
+        showAllRooms()
+        print('\n')
+    elif a>=2 & a<=4:
+        case=[['take','O'],['book','R'],['cancel','A']]
+        print('aaaaaaa')
+        b=input('Enter room number(floor.room) you want to {}: '.format(case[a-2][0]))
+        changeState(b,case[a-2][1])
+    elif a==-1:
+        print('Good bye')
+        break
+    else:
+        print('invalid input')
+    showAllRooms()
