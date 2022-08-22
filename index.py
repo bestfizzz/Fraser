@@ -18,7 +18,7 @@ def changeState(roomNumber,stateChange):
     room=int(roomNumber[roomNumber.index(".")+1:].strip())
     if floor <= len(hotel):
         if room<= len(hotel[floor-1]):
-            if stateChange=='R' & hotel[floor-1][room-1]=='O':
+            if stateChange=='R' and hotel[floor-1][room-1]=='O':
                 print('Room already occupied')
             elif stateChange==hotel[floor-1][room-1]:
                 print('no change were made')
