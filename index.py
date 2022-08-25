@@ -24,7 +24,6 @@ def changeState(roomNumber,stateChange):
                 print('no change were made')
             else:
                 hotel[floor-1][room-1]=stateChange
-                print(hotel)
         else: 
             print("\nroom doesn't exist")
     else: 
@@ -48,7 +47,7 @@ def showRooms(roomType):
         i=+1
     return logRoom(roomList,roomType)
 print('WELLCOME TO HOTEL')
-while True:
+while True: #main app
     print('\nmanual:\n4 to cancel booked rooms\n3 to book rooms\n2 to take rooms\n1 to view rooms\n-1 to quit\n')
     a = input('Enter a number: ')
     validInput=['-1','1','2','3','4']
