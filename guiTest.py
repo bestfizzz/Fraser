@@ -82,6 +82,7 @@ class App(tk.Tk):
                   else:
                         l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
+            #text display
             a = 'available' if roomType=='A' else 'occupied' if roomType=='O' else 'reserved'
             txt='Here are the {} rooms'.format(a)
             frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
@@ -97,7 +98,7 @@ class App(tk.Tk):
                   width=15)
       def showAllRoomsScreen(self,frame):
             self.showAllRooms(frame=frame)
-            txt='Here are all the rooms'
+            #configure
             frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
@@ -110,6 +111,7 @@ class App(tk.Tk):
             exitBtn.config(height=3, 
                   width=15)
       def roomOnClick(self,roomnum,frame,changeType=None):
+            #the make change function only runs when the action is chosen
             if changeType:  
                   mess=changeState(roomNumber=roomnum,stateChange=changeType)
                   self.mainApp(frame=frame)
