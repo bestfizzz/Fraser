@@ -5,7 +5,6 @@ from textwrap import fill
 import tkinter as tk
 from tkinter import BOTTOM, CENTER, TOP, X, Frame, Text, ttk
 from tkinter.messagebox import showinfo
-from typing_extensions import Self
 
 hotel = [['A', 'A', 'A', 'A'],
        ['A', 'A', 'A', 'A'],
@@ -106,6 +105,7 @@ class App(tk.Tk):
             
             t=tk.Label(frame2,text=''+txt)
             t.grid(column=0,sticky='w')
+            #back button display
             exitBtn=tk.Button(frame2,text='exit',command=partial(self.mainApp,frame))
             exitBtn.grid(column=1,padx=15,)
             exitBtn.config(height=3, 
