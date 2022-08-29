@@ -117,6 +117,7 @@ class App(tk.Tk):
             else:
                   print(roomnum)  
       def mainControlPanel(self,frame):
+            #configure
             frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
             frame2.rowconfigure(0, weight= 3)
             frame2.rowconfigure(1, weight= 1)
@@ -154,16 +155,17 @@ class App(tk.Tk):
             exitBtn.config(height=3, 
                   width=15)
       def changeStateMenu(self,frame,changeType):
-            #text based on changeType
-            a = 'free up' if changeType=='A' else 'take' if changeType=='O' else 'book'
-            txt='choose the room you want to {}'.format(a)
+            #configure
             frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
             frame2.grid(row=1,sticky="nsew")
-            
+            #text based on changeType
+            a = 'free up' if changeType=='A' else 'take' if changeType=='O' else 'book'
+            txt='choose the room you want to {}'.format(a)
             t=tk.Label(frame2,text=''+txt)
             t.grid(column=0,sticky='w')
+            #back btn
             exitBtn=tk.Button(frame2,text='back',command=partial(self.mainApp,frame))
             exitBtn.grid(column=1,padx=15,)
             exitBtn.config(height=3, 
