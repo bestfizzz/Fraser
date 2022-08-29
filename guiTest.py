@@ -56,7 +56,7 @@ class App(tk.Tk):
             self.mainApp(frame=frame)
       def showAllRooms(self,frame,changeType=None):
             #configure
-            frame1=tk.Frame(frame,bg="red",width=500,padx=15)
+            frame1=tk.Frame(frame,width=500,padx=15)
             frame1.grid(row=0,sticky="nsew")
             #display all rooms as buttons
             for i in range(len(hotel)):
@@ -70,7 +70,7 @@ class App(tk.Tk):
                         l.grid(column=j, row=i, padx=5,pady=5,sticky="nsew")
       def showSomeRooms(self,frame,theList):
             #configure
-            frame1=tk.Frame(frame,bg="red",width=500,padx=15)
+            frame1=tk.Frame(frame,width=500,padx=15)
             frame1.grid(row=0,sticky="nsew")
             j=0
             k=0
