@@ -86,6 +86,11 @@ class App(tk.Tk):
                         k=0
                   l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
+            #configure
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
+            frame2.grid(row=1,sticky="nsew")
+            frame2.columnconfigure(0, weight= 3)
+            frame2.columnconfigure(1, weight= 1)
             #text display
             a = 'available' if roomType=='A' else 'occupied' if roomType=='O' else 'reserved'
             txt='Here are the {} rooms'.format(a)
