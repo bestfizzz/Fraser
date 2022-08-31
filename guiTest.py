@@ -1,11 +1,10 @@
 
 from functools import partial
-from telnetlib import X3PAD
 from textwrap import fill
 import tkinter as tk
 from tkinter import BOTTOM, CENTER, TOP, X, Frame, Text, ttk
 from tkinter.messagebox import showinfo
-
+import os
 hotel = [['A', 'A', 'A', 'A'],
        ['A', 'A', 'A', 'A'],
        ['O', 'O', 'R', 'R'],
@@ -81,10 +80,10 @@ class App(tk.Tk):
                   l.config(height=3, 
                   width=10)
                   k=k+1
+                  #max of 4 btn per row
                   if (i)%4==0:
                         j=j+1
                         k=0
-                  else:
                   l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
             #text display
@@ -136,8 +135,7 @@ class App(tk.Tk):
             bR.grid(column=0,row=0,padx=15, pady=15)
             bR.config(height=3, 
                   width=15)
-
-            #take room
+             #take room
             tR=tk.Button(frame2,text='take room',command=partial(self.changeStateScreen,frame,"O"))
             tR.grid(column=0,row=1)
             tR.config(height=3, 
@@ -159,6 +157,12 @@ class App(tk.Tk):
             exitBtn=tk.Button(frame2,text='exit',command=self.destroy)
             exitBtn.grid(column=2,row=0,padx=15, pady=15)
             exitBtn.config(height=3, 
+                  width=15)
+
+            #draw map
+            mapBtn=tk.Button(frame2,text='map',command=partial(os.system,'python3 "/home/minh.nh2@buv.edu.vn/Desktop/Fraser/turtleMap.py"'))
+            mapBtn.grid(column=2,row=1,padx=15, pady=15)
+            mapBtn.config(height=3, 
                   width=15)
       def changeStateMenu(self,frame,changeType):
             #configure
