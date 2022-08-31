@@ -81,11 +81,11 @@ class App(tk.Tk):
                   l.config(height=3, 
                   width=10)
                   k=k+1
-                  if (i)%5==0:
+                  if (i)%4==0:
                         j=j+1
                         k=0
                   else:
-                        l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
+                  l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
             #text display
             a = 'available' if roomType=='A' else 'occupied' if roomType=='O' else 'reserved'
