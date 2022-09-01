@@ -7,19 +7,20 @@ hotel = [['A', 'A', 'A', 'A'],
        ['A', 'A', 'A', 'A']]
 
 speed(10)
-def drawRoom():
-    for z in range(4):
+def drawRoom(floorNumber,roomNumber):
+    for i in range(4):
         forward(40)
         left(90)
+    write('{}0{}'.format(floorNumber+1,roomNumber+1))
 def drawFloor(floorNumber):
-    for j in range(len(hotel[floorNumber])):
-        drawRoom()
+    for room in range(len(hotel[floorNumber])):
+        drawRoom(floorNumber,room)
         forward(40)
 def drawHotel():
-    for i in range(len(hotel)):
-        drawFloor(i)
+    for floor in range(len(hotel),0,-1):
+        drawFloor(floor-1)
         drawHallway()
-        if i == len(hotel)-1:
+        if floor == 1:
             continue
         else:
             forward(40)

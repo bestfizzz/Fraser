@@ -14,18 +14,16 @@ def getRoom(roomType):
       roomList=[]
       roomType=roomType.upper()
       #search for room that have the roomTpye
-      for i in range(0,len(hotel)):
-            for j in range(0,len(hotel[i])):
-                  print(i,j)
-                  if roomType==hotel[i][j]:
-                        roomList.append('{}.{}: {}'.format(i+1,j+1,roomType))
-                        j=j+1
-            i=+1
+      for floor in range(0,len(hotel)):
+            for room in range(0,len(hotel[floor])):
+                  print(floor,room)
+                  if roomType==hotel[floor][room]:
+                        roomList.append('{}0{}: {}'.format(floor+1,room+1,roomType))
       return roomList
 def changeState(roomNumber,stateChange):
     stateChange=stateChange.upper()
-    floor=int(roomNumber[:roomNumber.index(".")].strip())
-    room=int(roomNumber[roomNumber.index(".")+1:].strip())
+    floor=int(roomNumber[:roomNumber.index("0")].strip())
+    room=int(roomNumber[roomNumber.index("0")+1:].strip())
     #check if floor and room exist(no longer needed)
     if floor <= len(hotel):
         if room<= len(hotel[floor-1]):
@@ -58,15 +56,15 @@ class App(tk.Tk):
             frame1=tk.Frame(frame,width=500,padx=15)
             frame1.grid(row=0,sticky="nsew")
             #display all rooms as buttons
-            for i in range(len(hotel)):
-                  for j in range(len(hotel[i])):
-                        print(i,j)
-                        rN='{}.{}'.format(i+1,j+1)
-                        x='{}: {}'.format(rN,hotel[i][j])
+            for floor in range(len(hotel)):
+                  for room in range(len(hotel[floor])):
+                        print(floor,room)
+                        rN='{}0{}'.format(floor+1,room+1)
+                        x='{}: {}'.format(rN,hotel[floor][room])
                         l =  tk.Button(frame1,text=''+x,command=partial(self.roomOnClick,rN,frame,changeType))
                         l.config(height=3, 
                   width=10)
-                        l.grid(column=j, row=i, padx=5,pady=5,sticky="nsew")
+                        l.grid(column=room, row=floor, padx=5,pady=5,sticky="nsew")
       def showSomeRooms(self,frame,theList):
             #configure
             frame1=tk.Frame(frame,width=500,padx=15)
@@ -165,7 +163,11 @@ class App(tk.Tk):
                   width=15)
 
             #draw map
-            mapBtn=tk.Button(frame2,text='map',command=partial(os.system,'python3 "/home/minh.nh2@buv.edu.vn/Desktop/Fraser/turtleMap.py"'))
+            mapBtn=tk.Button(frame2,text='map',command=partial(os.system,
+            #'python3 "/home/minh.nh2@buv.edu.vn/Desktop/Fraser/turtleMap.py"'  
+            'python3 "turtleMap.py"'
+            #'py "turtleMap.py"'
+            ))
             mapBtn.grid(column=2,row=1,padx=15, pady=15)
             mapBtn.config(height=3, 
                   width=15)
@@ -213,7 +215,7 @@ class App(tk.Tk):
                   width=15)
 
             #view all room
-            vR=tk.Button(frame2,text='view room',command=partial(self.showAllRoomsScreen,frame))
+            vR=tk.Button(frame2,text='view all room',command=partial(self.showAllRoomsScreen,frame))
             vR.grid(column=1,row=1)
             vR.config(height=3, 
                   width=15)
