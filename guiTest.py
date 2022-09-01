@@ -78,7 +78,6 @@ class App(tk.Tk):
                   if (i)%4==0:
                         j=j+1
                         k=0
-                  else:
                   l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
             #text display
@@ -102,7 +101,7 @@ class App(tk.Tk):
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
             frame2.grid(row=1,sticky="nsew")
-            
+            txt='Here are all the rooms'
             t=tk.Label(frame2,text=''+txt)
             t.grid(column=0,sticky='w')
             #back button display
