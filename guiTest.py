@@ -1,11 +1,10 @@
 
 from functools import partial
-from telnetlib import X3PAD
 from textwrap import fill
 import tkinter as tk
 from tkinter import BOTTOM, CENTER, TOP, X, Frame, Text, ttk
 from tkinter.messagebox import showinfo
-
+import os
 hotel = [['A', 'A', 'A', 'A'],
        ['A', 'A', 'A', 'A'],
        ['O', 'O', 'R', 'R'],
@@ -14,11 +13,12 @@ def getRoom(roomType):
       print(roomType)
       roomList=[]
       roomType=roomType.upper()
+      #search for room that have the roomTpye
       for i in range(0,len(hotel)):
             for j in range(0,len(hotel[i])):
                   print(i,j)
                   if roomType==hotel[i][j]:
-                        roomList.append('{}.{}'.format(i+1,j+1))
+                        roomList.append('{}.{}: {}'.format(i+1,j+1,roomType))
                         j=j+1
             i=+1
       return roomList
@@ -26,8 +26,10 @@ def changeState(roomNumber,stateChange):
     stateChange=stateChange.upper()
     floor=int(roomNumber[:roomNumber.index(".")].strip())
     room=int(roomNumber[roomNumber.index(".")+1:].strip())
+    #check if floor and room exist(no longer needed)
     if floor <= len(hotel):
         if room<= len(hotel[floor-1]):
+          #stop user from making invailid changes
             if stateChange=='R' and hotel[floor-1][room-1]=='O':
                 return 'Room already occupied'
             elif stateChange==hotel[floor-1][room-1]:
@@ -43,7 +45,7 @@ class App(tk.Tk):
       def __init__(self):
             super().__init__()
             # configure the root window
-            # self.title('My Awesome App')
+            self.title('Buv sunshine hotel')
             self.geometry('400x500')
             frame=tk.Frame(self,padx=2,width=500,height=500)
             frame.pack(side=TOP,fill='both',expand=True)
@@ -52,55 +54,62 @@ class App(tk.Tk):
             frame.grid()
             self.mainApp(frame=frame)
       def showAllRooms(self,frame,changeType=None):
-            frame1=tk.Frame(frame,bg="red",width=500,padx=15)
+            #configure
+            frame1=tk.Frame(frame,width=500,padx=15)
             frame1.grid(row=0,sticky="nsew")
+            #display all rooms as buttons
             for i in range(len(hotel)):
                   for j in range(len(hotel[i])):
                         print(i,j)
                         rN='{}.{}'.format(i+1,j+1)
-                        
                         x='{}: {}'.format(rN,hotel[i][j])
                         l =  tk.Button(frame1,text=''+x,command=partial(self.roomOnClick,rN,frame,changeType))
                         l.config(height=3, 
                   width=10)
                         l.grid(column=j, row=i, padx=5,pady=5,sticky="nsew")
       def showSomeRooms(self,frame,theList):
-            frame1=tk.Frame(frame,bg="red",width=500,padx=15)
+            #configure
+            frame1=tk.Frame(frame,width=500,padx=15)
             frame1.grid(row=0,sticky="nsew")
             j=0
             k=0
+            #display rooms as buttons base on the list return from getList
             for i in range(len(theList)):
                   rN=theList[i]
                   l =  tk.Button(frame1,text=''+rN,command=partial(self.roomOnClick,rN,frame))
                   l.config(height=3, 
                   width=10)
                   k=k+1
+                  #max of 4 btn per row
                   if (i)%4==0:
                         j=j+1
                         k=0
                   l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
+            #configure
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
+            frame2.grid(row=1,sticky="nsew")
+            frame2.columnconfigure(0, weight= 3)
+            frame2.columnconfigure(1, weight= 1)
             #text display
             a = 'available' if roomType=='A' else 'occupied' if roomType=='O' else 'reserved'
             txt='Here are the {} rooms'.format(a)
-            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
-            frame2.columnconfigure(0, weight= 3)
-            frame2.columnconfigure(1, weight= 1)
-            frame2.grid(row=1,sticky="nsew")
-            
             t=tk.Label(frame2,text=''+txt)
             t.grid(column=0,sticky='w')
-            exitBtn=tk.Button(frame2,text='exit',command=partial(self.mainApp,frame))
+            #back button display
+            exitBtn=tk.Button(frame2,text='back',command=partial(self.mainApp,frame))
             exitBtn.grid(column=1,padx=15,)
             exitBtn.config(height=3, 
                   width=15)
       def showAllRoomsScreen(self,frame):
+            #show all rooms
             self.showAllRooms(frame=frame)
             #configure
             frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
             frame2.grid(row=1,sticky="nsew")
+            #text display
             txt='Here are all the rooms'
             t=tk.Label(frame2,text=''+txt)
             t.grid(column=0,sticky='w')
@@ -131,8 +140,7 @@ class App(tk.Tk):
             bR.grid(column=0,row=0,padx=15, pady=15)
             bR.config(height=3, 
                   width=15)
-
-            #take room
+             #take room
             tR=tk.Button(frame2,text='take room',command=partial(self.changeStateScreen,frame,"O"))
             tR.grid(column=0,row=1)
             tR.config(height=3, 
@@ -154,6 +162,12 @@ class App(tk.Tk):
             exitBtn=tk.Button(frame2,text='exit',command=self.destroy)
             exitBtn.grid(column=2,row=0,padx=15, pady=15)
             exitBtn.config(height=3, 
+                  width=15)
+
+            #draw map
+            mapBtn=tk.Button(frame2,text='map',command=partial(os.system,'python3 "/home/minh.nh2@buv.edu.vn/Desktop/Fraser/turtleMap.py"'))
+            mapBtn.grid(column=2,row=1,padx=15, pady=15)
+            mapBtn.config(height=3, 
                   width=15)
       def changeStateMenu(self,frame,changeType):
             #configure
@@ -210,6 +224,7 @@ class App(tk.Tk):
             exitBtn.config(height=3, 
                   width=15)
       def viewRoomScreen(self,frame,roomType):
+            #show room based on asked roomType
             theList=getRoom(roomType=roomType)
             self.showSomeRooms(frame=frame,theList=theList)
             self.viewRoomQuote(roomType=roomType,frame=frame)
@@ -217,6 +232,7 @@ class App(tk.Tk):
             self.showAllRooms(frame=frame,changeType=changeType)
             self.changeStateMenu(frame=frame,changeType=changeType)
       def mainApp(self,frame):
+            #beginning screen
             self.showAllRooms(frame=frame)
             self.mainControlPanel(frame=frame)
       
