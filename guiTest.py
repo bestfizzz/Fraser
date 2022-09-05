@@ -44,13 +44,27 @@ class App(tk.Tk):
             super().__init__()
             # configure the root window
             self.title('Buv sunshine hotel')
-            self.geometry('400x500')
+            self.geometry('500x500')
             frame=tk.Frame(self,padx=2,width=500,height=500)
             frame.pack(side=TOP,fill='both',expand=True)
             frame.rowconfigure(0, weight= 3)
             frame.rowconfigure(1, weight= 1)
             frame.grid()
-            self.mainApp(frame=frame)
+            self.welcomeScreen(frame=frame)
+      def welcomeScreen(self,frame):
+            frame1=tk.Frame(frame,width=500,padx=15)
+            frame2=tk.Frame(frame,pady=20,height=50,width=500)
+            frame2.columnconfigure(0,weight=1)
+            frame2.columnconfigure(1,weight=1)
+            frame2.columnconfigure(2,weight=1)
+            frame1.grid(row=0,sticky="NWSE")
+            frame2.grid(row=1,sticky="NWSE")
+            welcomeText=tk.Label(frame1,text='\n\n    WELCOME \n    TO \n      BUV SUNSHINE',font=("Arial", 35))
+            startbtn=tk.Button(frame2,text="start",command=partial(self.mainApp,frame))
+            exitbtn=tk.Button(frame2,text="exit",command=self.destroy)
+            welcomeText.grid(sticky="NWES")
+            startbtn.grid(row=0,column=1,sticky='NWSE')
+            exitbtn.grid(row=1,column=1,sticky='NWSE',pady=15)
       def showAllRooms(self,frame,changeType=None):
             #configure
             frame1=tk.Frame(frame,width=500,padx=15)
@@ -157,7 +171,7 @@ class App(tk.Tk):
                   width=15)
 
             #exit
-            exitBtn=tk.Button(frame2,text='exit',command=self.destroy)
+            exitBtn=tk.Button(frame2,text='back to title',command=partial(self.welcomeScreen,frame))
             exitBtn.grid(column=2,row=0,padx=15, pady=15)
             exitBtn.config(height=3, 
                   width=15)
