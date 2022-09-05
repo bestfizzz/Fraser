@@ -1,8 +1,6 @@
 
 from functools import partial
-from textwrap import fill
 import tkinter as tk
-from tkinter import BOTTOM, CENTER, TOP, X, Frame, Text, ttk
 from tkinter.messagebox import showinfo
 import os
 hotel = [['A', 'A', 'A', 'A'],
@@ -44,22 +42,22 @@ class App(tk.Tk):
             super().__init__()
             # configure the root window
             self.title('Buv sunshine hotel')
-            self.geometry('500x500')
-            frame=tk.Frame(self,padx=2,width=500,height=500)
-            frame.pack(side=TOP,fill='both',expand=True)
+            self.geometry('535x480')
+            frame=tk.Frame(self,padx=2,width=535,height=500,bg='yellow')
+            frame.pack(side="top",fill='both',expand=True)
             frame.rowconfigure(0, weight= 3)
             frame.rowconfigure(1, weight= 1)
             frame.grid()
             self.welcomeScreen(frame=frame)
       def welcomeScreen(self,frame):
-            frame1=tk.Frame(frame,width=500,padx=15)
-            frame2=tk.Frame(frame,pady=20,height=50,width=500)
+            frame1=tk.Frame(frame,width=500,bg='yellow')
+            frame2=tk.Frame(frame,pady=20,bg='yellow')
             frame2.columnconfigure(0,weight=1)
             frame2.columnconfigure(1,weight=1)
             frame2.columnconfigure(2,weight=1)
             frame1.grid(row=0,sticky="NWSE")
             frame2.grid(row=1,sticky="NWSE")
-            welcomeText=tk.Label(frame1,text='\n\n    WELCOME \n    TO \n      BUV SUNSHINE',font=("Arial", 35))
+            welcomeText=tk.Label(frame1,text='\n\n    WELCOME \n    TO \n      BUV SUNSHINE',font=("Arial", 35),bg='yellow')
             startbtn=tk.Button(frame2,text="start",command=partial(self.mainApp,frame))
             exitbtn=tk.Button(frame2,text="exit",command=self.destroy)
             welcomeText.grid(sticky="NWES")
@@ -67,7 +65,7 @@ class App(tk.Tk):
             exitbtn.grid(row=1,column=1,sticky='NWSE',pady=15)
       def showAllRooms(self,frame,changeType=None):
             #configure
-            frame1=tk.Frame(frame,width=500,padx=15)
+            frame1=tk.Frame(frame,width=500,padx=15,bg='red')
             frame1.grid(row=0,sticky="nsew")
             #display all rooms as buttons
             for floor in range(len(hotel)):
@@ -77,11 +75,11 @@ class App(tk.Tk):
                         x='{}: {}'.format(rN,hotel[floor][room])
                         l =  tk.Button(frame1,text=''+x,command=partial(self.roomOnClick,rN,frame,changeType))
                         l.config(height=3, 
-                  width=10)
+                  width=15,bg='white')
                         l.grid(column=room, row=floor, padx=5,pady=5,sticky="nsew")
       def showSomeRooms(self,frame,theList):
             #configure
-            frame1=tk.Frame(frame,width=500,padx=15)
+            frame1=tk.Frame(frame,width=500,padx=15,bg='red')
             frame1.grid(row=0,sticky="nsew")
             j=0
             k=0
@@ -90,7 +88,7 @@ class App(tk.Tk):
                   rN=theList[i]
                   l =  tk.Button(frame1,text=''+rN,command=partial(self.roomOnClick,rN,frame))
                   l.config(height=3, 
-                  width=10)
+                  width=15,bg='white')
                   k=k+1
                   #max of 4 btn per row
                   if (i)%4==0:
@@ -100,7 +98,7 @@ class App(tk.Tk):
       def viewRoomQuote(self,frame,roomType):
             #configure
             frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
-            frame2.grid(row=1,sticky="nsew")
+            frame2.grid(row=1,sticky="nsew",bg='red')
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
             #text display
@@ -140,7 +138,7 @@ class App(tk.Tk):
                   print(roomnum)  
       def mainControlPanel(self,frame):
             #configure
-            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50,bg='red')
             frame2.rowconfigure(0, weight= 3)
             frame2.rowconfigure(1, weight= 1)
             frame2.columnconfigure(0, weight= 1)
@@ -187,7 +185,7 @@ class App(tk.Tk):
                   width=15)
       def changeStateMenu(self,frame,changeType):
             #configure
-            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50,bg='red')
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
             frame2.grid(row=1,sticky="nsew")
@@ -203,7 +201,7 @@ class App(tk.Tk):
                   width=15)
       def viewMenu(self,frame):
             #frame
-            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50,bg='red')
             frame2.rowconfigure(0, weight= 3)
             frame2.rowconfigure(1, weight= 1)
             frame2.columnconfigure(0, weight= 1)
