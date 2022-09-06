@@ -2,11 +2,9 @@
 from functools import partial
 import tkinter as tk
 from tkinter.messagebox import showinfo
+import firebaseTest
 import os
-hotel = [['A', 'A', 'A', 'A'],
-       ['A', 'A', 'A', 'A'],
-       ['O', 'O', 'R', 'R'],
-       ['A', 'A', 'A', 'A']]
+hotel = firebaseTest.getHotel()
 def getRoom(roomType):
       print(roomType)
       roomList=[]
@@ -32,6 +30,7 @@ def changeState(roomNumber,stateChange):
                 return 'no change were made'
             else:
                 hotel[floor-1][room-1]=stateChange
+                firebaseTest.uploadHotel(hotel)
                 return 'Success'
         else: 
             print("\nroom doesn't exist")
