@@ -97,14 +97,15 @@ class App(tk.Tk):
                   l.grid(row=j,column=k ,padx=5,pady=5,sticky="nsew")
       def viewRoomQuote(self,frame,roomType):
             #configure
-            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
-            frame2.grid(row=1,sticky="nsew",bg='red')
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50,bg='red')
+            
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
+            frame2.grid(row=1,sticky="nsew")
             #text display
             a = 'available' if roomType=='A' else 'occupied' if roomType=='O' else 'reserved'
             txt='Here are the {} rooms'.format(a)
-            t=tk.Label(frame2,text=''+txt)
+            t=tk.Label(frame2,text=''+txt,bg="red")
             t.grid(column=0,sticky='w')
             #back button display
             exitBtn=tk.Button(frame2,text='back',command=partial(self.mainApp,frame))
@@ -115,13 +116,13 @@ class App(tk.Tk):
             #show all rooms
             self.showAllRooms(frame=frame)
             #configure
-            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50)
+            frame2=tk.Frame(frame,pady=20,highlightbackground="black" , highlightthickness=1,height=50,bg='red')
             frame2.columnconfigure(0, weight= 3)
             frame2.columnconfigure(1, weight= 1)
             frame2.grid(row=1,sticky="nsew")
             #text display
             txt='Here are all the rooms'
-            t=tk.Label(frame2,text=''+txt)
+            t=tk.Label(frame2,text=''+txt,bg='red')
             t.grid(column=0,sticky='w')
             #back button display
             exitBtn=tk.Button(frame2,text='exit',command=partial(self.mainApp,frame))
@@ -192,7 +193,7 @@ class App(tk.Tk):
             #text based on changeType
             a = 'free up' if changeType=='A' else 'take' if changeType=='O' else 'book'
             txt='choose the room you want to {}'.format(a)
-            t=tk.Label(frame2,text=''+txt)
+            t=tk.Label(frame2,text=''+txt,bg='red')
             t.grid(column=0,sticky='w')
             #back btn
             exitBtn=tk.Button(frame2,text='back',command=partial(self.mainApp,frame))
