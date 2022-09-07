@@ -27,5 +27,5 @@ def uploadHotel(hotel):
 def getHotel():
     hotel=[]
     for i in doc_ref.get().to_dict():
-        hotel.append(doc_ref.get().to_dict()[i])
+        hotel.insert(0,doc_ref.get().to_dict()[i])
     return hotel
