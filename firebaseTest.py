@@ -10,9 +10,11 @@ app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
 doc_ref = db.collection(u'BUV ss').document(u'Hotel')
+#only works with strong internet connection
 def uploadHotel(hotel):
     global doc_ref
     try:
+        #upload list in 4 parts(floor)
         doc_ref.set({
         u'f1':hotel[0],
         u'f2':hotel[1],
