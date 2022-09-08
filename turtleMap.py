@@ -1,17 +1,15 @@
 
 import tkinter as tk
 from turtle import *
-hotel = [['A', 'A', 'A', 'A'],
-       ['A', 'A', 'A', 'A'],
-       ['O', 'O', 'R', 'R'],
-       ['A', 'A', 'A', 'A']]
+import firebaseTest
+hotel = firebaseTest.getHotel()
 
 speed(10)
 def drawRoom(floorNumber,roomNumber):
     for i in range(4):
         forward(40)
         left(90)
-    write('   {}0{}'.format(floorNumber+1,roomNumber+1))
+    write('  {}0{}: {}'.format(floorNumber+1,roomNumber+1,hotel[floorNumber][roomNumber]))
 def drawFloor(floorNumber):
     for room in range(len(hotel[floorNumber])):
         drawRoom(floorNumber,room)

@@ -70,7 +70,7 @@ class App(tk.Tk):
             logoLable=tk.Label(frame1,image=self.image1,highlightthickness=0,borderwidth=0)
             welcomeText.grid(row=1,sticky="NWES")
             startBtn.grid(row=0,column=1,sticky='NWSE')
-            exitBtn.grid(row=1,column=1,sticky='NWSE',pady=15)S
+            exitBtn.grid(row=1,column=1,sticky='NWSE',pady=15)
             logoLable.grid(row=0,sticky="W")
       def showAllRooms(self,frame,changeType=None):
             #configure
