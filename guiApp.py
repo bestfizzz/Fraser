@@ -4,12 +4,15 @@ import tkinter as tk
 from tkinter.messagebox import showinfo
 import firebaseTest
 import os
+from PIL import Image  
+#get data
 hotel = firebaseTest.getHotel()
+#user= firebaseTest.getUser()
 def getRoom(roomType):
       print(roomType)
       roomList=[]
       roomType=roomType.upper()
-      #search for room that have the roomTpye
+      #search for room that have the same roomTpye
       for floor in range(0,len(hotel)):
             for room in range(0,len(hotel[floor])):
                   print(floor,room)
@@ -23,6 +26,7 @@ def changeState(roomNumber,stateChange):
     #check if floor and room exist(no longer needed)
     if floor <= len(hotel):
         if room<= len(hotel[floor-1]):
+          #may check if the user is the current owner via checkRoom  
           #stop user from making invailid changes
             if stateChange=='R' and hotel[floor-1][room-1]=='O':
                 return 'Room already occupied'
@@ -42,26 +46,32 @@ class App(tk.Tk):
             # configure the root window
             self.title('Buv sunshine hotel')
             self.geometry('535x480')
-            frame=tk.Frame(self,padx=2,width=535,height=500,bg='yellow')
+            frame=tk.Frame(self,padx=2,width=535,height=500,bg='white')
             frame.pack(side="top",fill='both',expand=True)
             frame.rowconfigure(0, weight= 3)
             frame.rowconfigure(1, weight= 1)
             frame.grid()
+            self.image1 = tk.PhotoImage(file="./buv2.png")
+            #run beging screen
             self.welcomeScreen(frame=frame)
       def welcomeScreen(self,frame):
-            frame1=tk.Frame(frame,width=500,bg='yellow')
-            frame2=tk.Frame(frame,pady=20,bg='yellow')
+            frame1=tk.Frame(frame,width=500,bg='white')
+            frame1.rowconfigure(0,weight=1)
+            frame1.rowconfigure(0,weight=1)
+            frame2=tk.Frame(frame,pady=20,bg='white')
             frame2.columnconfigure(0,weight=1)
             frame2.columnconfigure(1,weight=1)
             frame2.columnconfigure(2,weight=1)
             frame1.grid(row=0,sticky="NWSE")
             frame2.grid(row=1,sticky="NWSE")
-            welcomeText=tk.Label(frame1,text='\n\n    WELCOME \n    TO \n      BUV SUNSHINE',font=("Arial", 35),bg='yellow')
-            startbtn=tk.Button(frame2,text="start",command=partial(self.mainApp,frame))
-            exitbtn=tk.Button(frame2,text="exit",command=self.destroy)
-            welcomeText.grid(sticky="NWES")
-            startbtn.grid(row=0,column=1,sticky='NWSE')
-            exitbtn.grid(row=1,column=1,sticky='NWSE',pady=15)
+            welcomeText=tk.Label(frame1,text='WELCOME \n    TO \n      BUV SUNSHINE',font=("Arial", 35),bg='white')
+            startBtn=tk.Button(frame2,text="start",command=partial(self.mainApp,frame,))
+            exitBtn=tk.Button(frame2,text="exit",command=self.destroy)
+            logoLable=tk.Label(frame1,image=self.image1,highlightthickness=0,borderwidth=0)
+            welcomeText.grid(row=1,sticky="NWES")
+            startBtn.grid(row=0,column=1,sticky='NWSE')
+            exitBtn.grid(row=1,column=1,sticky='NWSE',pady=15)S
+            logoLable.grid(row=0,sticky="W")
       def showAllRooms(self,frame,changeType=None):
             #configure
             frame1=tk.Frame(frame,width=500,padx=15,bg='red')
@@ -169,7 +179,7 @@ class App(tk.Tk):
                   width=15)
 
             #exit
-            exitBtn=tk.Button(frame2,text='back to title',command=partial(self.welcomeScreen,frame))
+            exitBtn=tk.Button(frame2,text='back to title',command=partial(self.welcomeScreen,frame,))
             exitBtn.grid(column=2,row=0,padx=15, pady=15)
             exitBtn.config(height=3, 
                   width=15)
@@ -246,7 +256,7 @@ class App(tk.Tk):
             self.showAllRooms(frame=frame,changeType=changeType)
             self.changeStateMenu(frame=frame,changeType=changeType)
       def mainApp(self,frame):
-            #beginning screen
+            #main app screen
             self.showAllRooms(frame=frame)
             self.mainControlPanel(frame=frame)
       
